@@ -1,7 +1,0 @@
-before_script: 
-  - cd code/travelapp-boot/
-  - echo $TRAVIS_BUILD_DIR
-
-script:
-  - echo $TRAVIS_BUILD_DIR
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
