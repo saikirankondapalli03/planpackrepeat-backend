@@ -1,6 +1,3 @@
-language: java
-jdk: oraclejdk8
-
 script:
   - echo $TRAVIS_BUILD_DIR
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
