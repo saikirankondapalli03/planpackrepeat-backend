@@ -1,4 +1,4 @@
-ackage com.travellerapp;
+package com.travellerapp;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
