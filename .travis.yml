@@ -5,7 +5,7 @@ services:
  
 #Tell Travis that before executing the script, create the docker image from the DevDockerfile.
 before_install:
-  - docker build -t planpackrepeat-backend
+  - docker build planpackrepeat-backend
  
 #Tell Travis to execute tests (-- -- Coverage will exit npm run test and print out the code coverage)
 
