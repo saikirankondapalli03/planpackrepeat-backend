@@ -1,39 +1,27 @@
 sudo: required
 services:
-#Tell Travis that we need docker
   - docker
 language: generic
 
 cache:
   directories:
   - $HOME/.m2  
-#Tell Travis that before executing the script, create the docker image from the DevDockerfile.
+
 before_install:
   - mvn clean install
   - cd ../
   - docker build planpackrepeat-backend
   - gem install bundler
  
-#Tell Travis to execute tests (-- -- Coverage will exit npm run test and print out the code coverage)
-
 deploy:
-  #specify the provider 
   provider: elasticbeanstalk
-  #specify the region where the provider is present, You can get this from the AWS ElasticBeanstalk dashboard
   region: "us-east-1"
-  #Specify the application name in AWS elastic beanstalk
   app: "travelapp"
-  #Specify the environment name in AWS elastic beanstalk
   env: "TravelAppDocker-env"
-  #Specify the Bucket name which is the name of the S3 (storage) which is created as part of Elastic beanstalk in AWS
   bucket_name: "elasticbeanstalk-us-east-1-414657016646"
-  #specify the path of the Bucket , this will be similar to the App name above
   bucket_path: "travelapp"
-  #specify when you want to deploy (we want to deploy only when we push code to master branch)
   on:
     branch: master
-  #Specify the Environment variable name from which Travis can get the ACCESS_KEY to AWS
   access_key_id: $ACCESSKEYID
-  #Specify the Environment variable name from which Travis can get the SECRET_KEY to AWS
   secret_access_key:
     secure: $SECRETACCESSKEY
