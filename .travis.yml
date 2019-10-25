@@ -24,7 +24,7 @@ deploy:
   #Specify the application name in AWS elastic beanstalk
   app: "travelapp"
   #Specify the environment name in AWS elastic beanstalk
-  env: "DockerReactAws-env"
+  env: "Travelapp-env-1"
   #Specify the Bucket name which is the name of the S3 (storage) which is created as part of Elastic beanstalk in AWS
   bucket_name: "elasticbeanstalk-us-east-1-414657016646"
   #specify the path of the Bucket , this will be similar to the App name above
