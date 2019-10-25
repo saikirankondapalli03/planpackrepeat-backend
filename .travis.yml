@@ -8,6 +8,7 @@ before_install:
   - mvn clean install
   - cd ../
   - docker build planpackrepeat-backend
+  - gem install bundler
  
 #Tell Travis to execute tests (-- -- Coverage will exit npm run test and print out the code coverage)
 
