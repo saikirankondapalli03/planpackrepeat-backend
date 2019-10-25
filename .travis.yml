@@ -22,13 +22,13 @@ deploy:
   #specify the region where the provider is present, You can get this from the AWS ElasticBeanstalk dashboard
   region: "us-east-1"
   #Specify the application name in AWS elastic beanstalk
-  app: "planpackrepeat-backend"
+  app: "travelapp"
   #Specify the environment name in AWS elastic beanstalk
   env: "DockerReactAws-env"
   #Specify the Bucket name which is the name of the S3 (storage) which is created as part of Elastic beanstalk in AWS
   bucket_name: "elasticbeanstalk-us-east-1-414657016646"
   #specify the path of the Bucket , this will be similar to the App name above
-  bucket_path: "planpackrepeat-backend"
+  bucket_path: "travelapp"
   #specify when you want to deploy (we want to deploy only when we push code to master branch)
   on:
     branch: master
