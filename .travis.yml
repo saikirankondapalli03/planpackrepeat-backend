@@ -5,6 +5,7 @@ services:
  
 #Tell Travis that before executing the script, create the docker image from the DevDockerfile.
 before_install:
+  - mvn package dockerfile:build
   - cd ../
   - docker build planpackrepeat-backend
  
