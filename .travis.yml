@@ -3,7 +3,10 @@ services:
 #Tell Travis that we need docker
   - docker
 language: generic
- 
+
+cache:
+  directories:
+  - $HOME/.m2  
 #Tell Travis that before executing the script, create the docker image from the DevDockerfile.
 before_install:
   - mvn clean install
