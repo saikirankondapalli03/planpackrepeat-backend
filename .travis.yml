@@ -11,13 +11,12 @@ jobs:
       # install phase: with maven project packaging a jar is implicit
       # script phase: Copy artefact to build folder to allow upload to S3 bucket
       script:
-      - pip install aws-cli
-      - pip install awsebcli
       - mkdir build
       - cp target/travelapp-0.0.1-SNAPSHOT.jar build/travelapp.jar
       # Run a set of AWS eb commands to deploy application to AWS (Check for AWS Beanstalk logs to check for creation and deployment)
       before_deploy:
       - docker pull chriscamicas/awscli-awsebcli
+      - eb init
       - docker run -e ACCESSKEYID -e SECRETACCESSKEY chriscamicas/awscli-awsebcli /bin/sh -c "eb init travelapp -p \"64bit Amazon Linux 2017.09 v2.6.4 running Java 8\" --region \"ca-central-1\"; eb create TravelAppDocker-env --single || true; eb setenv SERVER_PORT=5000"
       after_deploy:
       - rm build/travelapp.jar
