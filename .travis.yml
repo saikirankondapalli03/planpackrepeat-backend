@@ -1,29 +1,33 @@
-sudo: required
-services:
-  - docker
-language: java
-
-cache:
-  directories:
-  - $HOME/.m2  
-
-before_install:
-  - mvn clean install
-  - cd ../
-  - docker build planpackrepeat-backend
- 
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "travelapp"
-  env: "TravelAppDocker-env"
-  bucket_name: "elasticbeanstalk-us-east-1-414657016646"
-  bucket_path: "travelapp"
-  on:
-    branch: master
-  access_key_id: $ACCESSKEYID
-  secret_access_key:
-    secure: $SECRETACCESSKEY
-    
-after_deploy:
-  - echo "App started" 
+jobs:
+  include:
+    # build-and-deploy stage
+    - stage: build-and-deploy
+      # Define a template with JAVA
+      language: java
+      # cache: Add a cache folder to improve build-speed
+      cache:
+        directories:
+        - $HOME/.m2
+      # install phase: with maven project packaging a jar is implicit
+      # script phase: Copy artefact to build folder to allow upload to S3 bucket
+      script:
+      - mkdir build
+      - cp target/travelapp-0.0.1-SNAPSHOT.jar build/travelapp.jar
+      # Run a set of AWS eb commands to deploy application to AWS (Check for AWS Beanstalk logs to check for creation and deployment)
+      before_deploy:
+      - docker pull chriscamicas/awscli-awsebcli
+      - docker run -e ACCESSKEYID -e SECRETACCESSKEY chriscamicas/awscli-awsebcli /bin/sh -c "eb init travelapp -p \"64bit Amazon Linux 2017.09 v2.6.4 running Java 8\" --region \"ca-central-1\"; eb create TravelAppDocker-env --single || true; eb setenv SERVER_PORT=5000"
+      after_deploy:
+      - rm build/travelapp.jar
+      # deploy binary from s3 bucket to beanstalk
+      deploy:
+      - provider: elasticbeanstalk
+        access_key_id: $ACCESSKEYID
+        secret_access_key: $SECRETACCESSKEY
+        zip-file: "build/travelapp.jar"
+        region: "us-east-1"
+        app: "travelapp"
+        env: "TravelAppDocker-env"
+        bucket_name: "elasticbeanstalk-us-east-1-414657016646"
+        skip_cleanup: true
+        only_create_app_version: false
