@@ -11,6 +11,8 @@ jobs:
       # install phase: with maven project packaging a jar is implicit
       # script phase: Copy artefact to build folder to allow upload to S3 bucket
       script:
+      - pip install aws-cli
+      - pip install awsebcli
       - mkdir build
       - cp target/travelapp-0.0.1-SNAPSHOT.jar build/travelapp.jar
       # Run a set of AWS eb commands to deploy application to AWS (Check for AWS Beanstalk logs to check for creation and deployment)
