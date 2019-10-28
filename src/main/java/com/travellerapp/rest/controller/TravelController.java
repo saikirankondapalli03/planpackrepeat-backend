@@ -29,9 +29,6 @@ public class TravelController
     {
     	List<TravellerDTO> list = new ArrayList<TravellerDTO>();
     	list.add(new TravellerDTO(1,"Jenelee","B","Jenelee@gmail.com"));
-    	list.add(new TravellerDTO(1,"Saransh","B","Saransh@gmail.com"));
-    	list.add(new TravellerDTO(1,"Maram","B","Maram@gmail.com"));
-    	list.add(new TravellerDTO(1,"Sai","B","Sai@gmail.com"));
     
         return list;
     }
