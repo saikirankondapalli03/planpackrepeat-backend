@@ -25,3 +25,6 @@ deploy:
   access_key_id: $ACCESSKEYID
   secret_access_key:
     secure: $SECRETACCESSKEY
+    
+after_deploy:
+  - echo "App started" 
