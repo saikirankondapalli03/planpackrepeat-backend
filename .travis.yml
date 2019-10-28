@@ -9,7 +9,7 @@ deploy:
     provider: elasticbeanstalk
     skip_cleanup: true
     app: travelapp
-    env: TravelAppDocker-env
+    env: Travelapp-env-1
     zip_file: 'build/travelapp.jar'
     bucket_name: elasticbeanstalk-us-east-1-414657016646
     region: us-east-1
